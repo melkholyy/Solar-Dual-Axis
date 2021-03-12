@@ -1,17 +1,17 @@
 
-#include <Servo.h> // include Servo library 
+#include <Servo.h> 
   int dtime = 10;
   int tol = 50;
-// 180 horizontal MAX
-Servo horizontal; // horizontal servo
-int servoh = 30;   // 90;     // stand horizontal servo
+
+Servo horizontal; 
+int servoh = 30;   
 
 int servohLimitHigh = 70;
 int servohLimitLow = 10;
 
 // 65 degrees MAX
-Servo vertical;   // vertical servo 
-int servov = 30;    //   90;     // stand vertical servo
+Servo vertical;   
+int servov = 30;    
 
 int servovLimitHigh = 70;
 int servovLimitLow = 10;
@@ -19,16 +19,15 @@ int servovLimitLow = 10;
 
 // LDR pin connections
 //  name  = analogpin;
-int ldrlt = 2; //LDR top left - BOTTOM LEFT    <--- BDG
-int ldrrt = 3; //LDR top rigt - BOTTOM RIGHT 
-int ldrld = 0; //LDR down left - TOP LEFT
-int ldrrd = 1; //ldr down rigt - TOP RIGHT
+int ldrlt = 2; //LDR top left 
+int ldrrt = 3; //LDR top rigt
+int ldrld = 0; //LDR down left 
+int ldrrd = 1; //LDR down rigt 
 
 void setup()
 {
   Serial.begin(9600);
-// servo connections
-// name.attacht(pin);
+
   horizontal.attach(9); 
   vertical.attach(10);
   horizontal.write(10);
@@ -44,8 +43,7 @@ void loop()
   int ld = analogRead(ldrld); // down left
   int rd = analogRead(ldrrd); // down rigt
   
-  // int dtime = analogRead(4)/20; // read potentiometers  
-  // int tol = analogRead(5)/4;
+
 
   
   int avt = ((lt + rt)/2);   // average value top
@@ -67,14 +65,7 @@ void loop()
   Serial.println("down");
 delay(500);
 
-// int hori = avl+avr;
- //int verti= avt+avd+2;
-// Serial.println(verti);
-//Serial.println(" vertical");
-//Serial.println(hori);
-//Serial.println("hori ");
- //if ( verti > hori)
- //{
+
   if (avt > avd)
   {
     servov=servov+10;
@@ -92,12 +83,7 @@ delay(500);
   }
   }
   vertical.write(servov);
- //}
-  
-  //delay(300);
-  
-  //if (hori>verti)
-  //{
+ 
 if (avl > avr)
   {
     servoh=servoh-10;
@@ -114,12 +100,7 @@ if (avl > avr)
      servoh = servohLimitHigh;
      }
   }
-  
-//  //else if (hori = verti)
-//  {
-//    // nothing
-//  }
- // }
+
   
   horizontal.write(servoh);
   
